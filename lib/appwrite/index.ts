@@ -1,8 +1,8 @@
-import { Account, Client, Databases } from 'node-appwrite';
+import { Account, Avatars, Client, Databases, Storage } from 'node-appwrite';
 import { appwriteConfig } from './config';
 import { cookies } from 'next/headers';
 
-const createSessionClient = async () => {
+export const createSessionClient = async () => {
     const client = new Client()
             .setEndpoint(appwriteConfig.endPointUrl)
             .setProject(appwriteConfig.projectId);
@@ -18,6 +18,29 @@ const createSessionClient = async () => {
         },
         get database() {
             return new Databases(client);
+        }
+    }
+};
+
+export const createAdminClient = async () => {
+    const client = new Client()
+            .setEndpoint(appwriteConfig.endPointUrl)
+            .setProject(appwriteConfig.projectId)
+            .setKey(appwriteConfig.secretKey)
+
+
+    return {
+        get account() {
+            return new Account(client);
+        },
+        get database() {
+            return new Databases(client);
+        },
+        get storage() {
+            return new Storage(client);
+        },
+        get avatars() {
+            return new Avatars(client);
         }
     }
 }
