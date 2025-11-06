@@ -16,6 +16,7 @@ import { Button } from '@/components/ui/button';
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { createAccount } from "@/lib/actions/user.actions";
 
 type FormType = "sign-in" | "sign-up";
 
@@ -40,7 +41,11 @@ const AuthForm = ({type}: {type: FormType}) => {
     });
     
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
+        setIsLoading(true);
+        const user = createAccount({
+            fullName: values.fullName || '',
+            email: values.email,
+        });
     }
 
   return (
