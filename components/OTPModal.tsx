@@ -1,9 +1,8 @@
+"use client"
 import React, { useState } from 'react';
-
 import {
     AlertDialog,
     AlertDialogAction,
-    AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
     AlertDialogFooter,
@@ -14,12 +13,15 @@ import {
 import {
     InputOTP,
     InputOTPGroup,
-    InputOTPSeparator,
     InputOTPSlot,
 } from "@/components/ui/input-otp"
 import Image from 'next/image';
+import { Button } from './ui/button';
+import { useRouter } from 'next/navigation';
+import { verifySecret, sendEmailOTP } from '@/lib/actions/user.actions';
 
 const OTPModal = ({ accountid, email }: { accountId: string, email: string }) => {
+    const router = useRouter();
     const [isOpen, setIsOpen] = useState(true);
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +31,9 @@ const OTPModal = ({ accountid, email }: { accountId: string, email: string }) =>
         setisLoading(true);
 
         try {
+            const sessionId = await verifySecret({accountId, password});
 
+            if(sessionId) router.push('/')
         } catch (error) {
             console.log("Failed to verify OTP", error);
 
@@ -37,8 +41,8 @@ const OTPModal = ({ accountid, email }: { accountId: string, email: string }) =>
 
     };
 
-    const handleResetOtp = async () => {
-
+    const handleResendOtp = async () => {
+        await sendEmailOTP({email});
     }
     return (
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
@@ -79,6 +83,15 @@ const OTPModal = ({ accountid, email }: { accountId: string, email: string }) =>
                             />}
                         </AlertDialogAction>
 
+                        <div className="subtitle-2 mt-2 text-center text-light-100">
+                            Didn&apos;t get a code?
+                            <Button
+                                type='button'
+                                variant="link"
+                                className='pl-1 text-brand'
+                                onClick={handleResendOtp}
+                            ></Button>
+                        </div>
                     </div>
                 </AlertDialogFooter>
             </AlertDialogContent>
