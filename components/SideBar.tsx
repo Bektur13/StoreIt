@@ -26,7 +26,7 @@ const SideBar = ({ fullName, avatar, email }: Props) => {
             </Link>
 
             <nav className="sidebar-nav">
-                <ul className="flex">
+                <ul className="flex flex-1 flex-col gap-6">
                     {navItems.map(({ url, name, icon }) => (
                         <Link key={name} href={url} className="lg:w-full">
                             <li

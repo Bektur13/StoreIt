@@ -20,7 +20,7 @@ import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
 import { verifySecret, sendEmailOTP } from '@/lib/actions/user.actions';
 
-const OTPModal = ({ accountid, email }: { accountId: string, email: string }) => {
+const OTPModal = ({ accountId, email }: { accountId: string, email: string }) => {
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(true);
     const [password, setPassword] = useState("");
@@ -28,7 +28,7 @@ const OTPModal = ({ accountid, email }: { accountId: string, email: string }) =>
 
     const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        setisLoading(true);
+        setIsLoading(true);
 
         try {
             const sessionId = await verifySecret({accountId, password});
