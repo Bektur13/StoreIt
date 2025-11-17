@@ -143,21 +143,3 @@ export const signInUser = async ({email}: {email: string}) => {
     }
 }
 
-// import { Query } from "node-appwrite";
-// import { createAdminClient } from "../appwrite";
-// import { appwriteConfig } from "../appwrite/config";
-
-// const getUserByEmail =  async (email: string) => {
-//     const { database } = await createAdminClient();
-//     const result = database.listDocuments(
-//         appwriteConfig.,
-//         appwriteConfig.collectionsId,
-//         [Query.equal('email', [email])]
-//     );
-
-//     return result.total > 0? (await result).documents[0] : null;
-// };
-
-// const createAccount = async ({fullName, email}: {fullName: string; email: string}) => {
-//     const existingUser = await getUserByEmail();
-// }
