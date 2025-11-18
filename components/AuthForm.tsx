@@ -92,7 +92,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
                     <Button type="submit" className="form-submit-button" disabled={isLoading}>
                         {type === 'sign-in' ? "Sign In" : "Sign Up"}
                         {isLoading && (
-                            <Image src="/assers/icons/loader.svg" alt="loader" width={24} height={24} className="ml-2 animate-spin" />
+                            <Image src="/assets/icons/loader.svg" alt="loader" width={24} height={24} className="ml-2 animate-spin" />
                         )}
                     </Button>
                     {errorMessage && (
