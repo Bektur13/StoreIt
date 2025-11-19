@@ -109,7 +109,6 @@ const MobileNavigation = ({
                     </div>
                 </SheetContent>
             </Sheet>
-
         </header>
     )
 }

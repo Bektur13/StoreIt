@@ -5,4 +5,5 @@ export const appwriteConfig = {
     secretKey: process.env.NEXT_APPWRITE_KEY!,
     databaseId: process.env.NEXT_PUBLIC_APPWRITE_DATABASE!,
     userTableId: process.env.NEXT_PUBLIC_APPWRITE_USERS_TABLE!,
+    filesTableId: process.env.NEXT_PUBLIC_APPWRITE_FILES_TABLE!,
 };
