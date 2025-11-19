@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 
 interface Props {
     $id: string,
-    accoundId: string,
+    accountId: string,
     fullName: string,
     avatar: string,
     email: string
@@ -27,7 +27,7 @@ interface Props {
 
 const MobileNavigation = ({
     $id: ownerId,
-    accoundId,
+    accountId,
     fullName,
     avatar,
     email,
@@ -101,7 +101,7 @@ const MobileNavigation = ({
                     <Separator className="my-5 bg-light-200/20" />
 
                     <div className="flex flex-col justify-between gap-5 pb-5">
-                        <FileUploader ownerId={ownerId} accountId={accoundId} />
+                        <FileUploader ownerId={ownerId} accountId={accountId} />
                         <Button type="submit" className="mobile-sign-out-button" onClick={async () => await signOutUser()}>
                             <Image src="/assets/icons/logout.svg" alt="logo" height={24} width={24} />
                             <p>Logout</p>
