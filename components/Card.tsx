@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import { Models } from 'node-appwrite'
-import React from 'react'
 import Thumbnail from './Thumbnail'
 import ActionDropdown from './ActionDropdown'
 import { convertFileSize } from '@/lib/utils'
@@ -27,4 +26,4 @@ const Card = ({file}: {file: Models.Document}) => {
   )
 }
 
-export default Card
+export default Card;

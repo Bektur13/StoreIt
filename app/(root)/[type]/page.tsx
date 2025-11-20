@@ -36,9 +36,9 @@ const Page = async ({ searchParams, params }: SearchParamProps) => {
         {/* Render files */}
         {files.total > 0 ? (
             <section className="file-list">
-                {files.documents.map((file: Models.Document) => {
+                {files.documents.map((file: Models.Document) => (
                     <Card key={file.$id} file={file}/>
-                })}
+                ))}
             </section>
         ) : (
             <p className="empty-list">No files uploaded</p>

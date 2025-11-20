@@ -141,7 +141,7 @@ export const renameFile = async ({
     }
 }
 
-export const updatedFileUsers = async ({
+export const updateFileUsers = async ({
     fileId,
     emails,
     path,
