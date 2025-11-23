@@ -106,7 +106,7 @@ const ActionDropdown = ({file}: {file: Models.Document}) => {
                         <Button onClick={handleAction} className='modal-submit-button'>
                             <p className="capitalize">{value}</p>
                             {isLoading && (
-                                <Image src='/assets/icons/loader.svg' alt='loader' width={24} height={24} className='animate-path' />
+                                <Image src='/assets/icons/loader.svg' alt='loader' width={24} height={24} className='animate-spin' />
                             )}
                         </Button>
                     </DialogFooter>
@@ -114,8 +114,18 @@ const ActionDropdown = ({file}: {file: Models.Document}) => {
             </DialogContent>
         )
     }
-  return (
-    <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}> 
+    const handleDialogOpenChange = (open: boolean) => {
+        setIsModalOpen(open);
+        // When dialog is closed, ensure all modal-related state is reset so overlays/focus don't persist
+        if (!open) {
+            setAction(null);
+            setName(file.name);
+            setIsDropdownOpen(false);
+        }
+    };
+
+    return (
+        <Dialog open={isModalOpen} onOpenChange={handleDialogOpenChange}>
         <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
             <DropdownMenuTrigger className="shad-no-focus">
                 <Image src="/assets/icons/dots.svg" alt='dots' height={34} width={34} />
@@ -128,7 +138,9 @@ const ActionDropdown = ({file}: {file: Models.Document}) => {
                 {actionsDropdownItems.map((actionItem) => (
                     <DropdownMenuItem key={actionItem.value} className="shad-dropdown-item" onClick={() =>{
                          setAction(actionItem);
+                         // Close dropdown when opening a dialog to avoid focus/overlay conflicts
                          if(["rename", "share", "delete", "details"].includes(actionItem.value)) {
+                            setIsDropdownOpen(false);
                             setIsModalOpen(true);
                             }
                     }} >

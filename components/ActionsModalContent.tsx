@@ -4,6 +4,7 @@ import FormattedDateTime from './FormattedDateTime'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
 import Image from 'next/image'
+import { convertFileSize, formatDateTime } from '@/lib/utils'
 
 const ImageThumbnail = ({file}: {file: Models.Document}) => (
     <div className='file-details-thumbnail'>
@@ -28,11 +29,12 @@ export const FileDetails = ({file}: {file: Models.Document}) => {
         <ImageThumbnail file={file} />
         <div className="space-y-4 px-2 pt-2">
             <DetailRow label="Format:" value={file.extension} />
-            <DetailRow label="Size:" value={file.extension} />
-            <DetailRow label="Owner:" value={file.extension} />
-            <DetailRow label="Last edit:" value={file.extension} />
+            <DetailRow label="Size:" value={convertFileSize(file.size)} />
+            <DetailRow label="Owner:" value={file.owner.fullName} />
+            <DetailRow label="Last edit:" value={formatDateTime(file.$updatedAt)} />
         </div>
-    </>)
+    </>
+    )
 };
 
 interface Props {
@@ -59,7 +61,7 @@ export const ShareInput = ({file, onInputChange, onRemove}: Props) => {
                 <div className="pt-4">
                     <div className="flex justify-between">
                         <p className="subtitle-2 text-light-100">Shared with</p>
-                        <p className="subtitle-2 text-light-100">{file.users.length}</p>
+                        <p className="subtitle-2 text-light-100">{file.users.length} users</p>
                     </div>
                 </div>
 
