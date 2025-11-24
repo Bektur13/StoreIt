@@ -12,4 +12,4 @@ const FormattedDateTime = ({
   )
 }
 
-export default FormattedDateTime
+export default FormattedDateTime;
